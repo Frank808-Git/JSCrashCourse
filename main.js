@@ -27,7 +27,7 @@ function showGreeting()
     {
         greetingText = "Good Afternoon!";
     }
-    else if (currentHour >= 19 && currentHour < 10)
+    else if (currentHour >= 19 && currentHour < 22)
     {
         greetingText = "Good Evening!";
     }
