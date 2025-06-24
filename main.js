@@ -10,17 +10,35 @@ document.querySelector("#close-nav-menu").addEventListener("click", function() {
     document.querySelector("header nav .wrapper").classList.remove("nav-open");
 })
 
+
+
 //Greetings
 
 const greetingText = "Good Morning!";
 const weatherCondition = "sunny";
 const locationText = "Vancouver";
 
-//Temperature switch
-
 let temp = 20.367;
-let degrees = "C";
-let weatherText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°${degrees} outside.`;
+
+let cText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°C outside.`;
+let fText = `The weather is ${weatherCondition} in ${locationText} and it's ${convertToF(temp).toFixed()}°F outside.`;
 
 document.querySelector("h1#greeting").innerHTML= greetingText;
-document.querySelector("p#weather").innerHTML= weatherText;
+document.querySelector("p#weather").innerHTML= cText;
+
+//Temperature switch
+function convertToF(num)
+{
+    return (num * 1.8) + 32;
+}
+
+document.querySelector(".weather-group").addEventListener("click", function(e) {
+    if (e.target.id == "fahr")
+    {
+        document.querySelector("p#weather").innerHTML= fText;
+    }
+    else if (e.target.id == "celsius")
+    {
+        document.querySelector("p#weather").innerHTML = cText;
+    }
+});
