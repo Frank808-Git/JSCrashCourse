@@ -77,3 +77,22 @@ const galleryImages = [
         alt: "Moon"
     }
 ]
+
+let mainImage = document.querySelector("#gallery > img");
+let thumbnails = document.querySelector("#gallery .thumbnails");
+
+mainImage.src = galleryImages[0].src;
+mainImage.alt = galleryImages[0].alt;
+
+//Loops through each image in image gallery and makes a thumbnail
+//Then appends the thumbnail to the thumbnails class
+galleryImages.forEach(function(img, idx){
+    let thumb = document.createElement("img");
+    thumb.src = img.src;
+    thumb.alt = img.alt;
+    thumb.dataset.arrayIndex = idx;
+    thumb.dataset.selected = false;
+    thumbnails.appendChild(thumb);
+});
+
+
