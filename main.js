@@ -20,7 +20,7 @@ const locationText = "Vancouver";
 
 let temp = 20.367;
 let degrees = "C";
-let weatherText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°C outside.`;
+let weatherText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°${degrees} outside.`;
 
 document.querySelector("h1#greeting").innerHTML= greetingText;
 document.querySelector("p#weather").innerHTML= weatherText;
