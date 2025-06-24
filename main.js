@@ -13,27 +13,33 @@ document.querySelector("#close-nav-menu").addEventListener("click", function() {
 
 
 //Greetings
-let currentHour = new Date().getHours();
-setInterval(currentHour = new Date().getHours(), 3600000)
 
-let greetingText;
+function showGreeting()
+{
+    let currentHour = new Date().getHours();
+    let greetingText;
 
-if (currentHour < 12 && currentHour > 5)
-{
-    greetingText = "Good Morning!";
-}
-else if (currentHour >= 12 && currentHour < 19)
-{
-    greetingText = "Good Afternoon!";
-}
-else if (currentHour >= 19 && currentHour < 10)
-{
-    greetingText = "Good Evening!";
-}
-else
-{
-    greetingText = "Good Night!";
-}
+    if (currentHour < 12 && currentHour > 5)
+    {
+        greetingText = "Good Morning!";
+    }
+    else if (currentHour >= 12 && currentHour < 19)
+    {
+        greetingText = "Good Afternoon!";
+    }
+    else if (currentHour >= 19 && currentHour < 10)
+    {
+        greetingText = "Good Evening!";
+    }
+    else
+    {
+        greetingText = "Good Night!";
+    }
+    document.querySelector("h1#greeting").innerHTML= greetingText;
+};
+
+showGreeting();
+setInterval(showGreeting, 1800000);
 
 const weatherCondition = "sunny";
 const locationText = "Vancouver";
@@ -43,7 +49,6 @@ let temp = 20.367;
 let cText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°C outside.`;
 let fText = `The weather is ${weatherCondition} in ${locationText} and it's ${convertToF(temp).toFixed()}°F outside.`;
 
-document.querySelector("h1#greeting").innerHTML= greetingText;
 document.querySelector("p#weather").innerHTML= cText;
 
 //Temperature switch
