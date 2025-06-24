@@ -45,16 +45,35 @@ document.querySelector(".weather-group").addEventListener("click", function(e) {
 
 
 //Date and time
-//# is for finding ids
+//# is for finding ids, . is for finding classes, X[Y=Z] is a more general way of finding elements
 
 function setTime()
 {
     let time = new Date();
 
-    document.querySelector("span[data-time=hours]").textContent= (time.getHours());
-    document.querySelector("span[data-time=minutes]").textContent= (time.getMinutes());
-    document.querySelector("span[data-time=seconds]").textContent= (time.getSeconds());
+    document.querySelector("span[data-time=hours]").textContent= (time.getHours().toString().padStart(2, '0'));
+    document.querySelector("span[data-time=minutes]").textContent= (time.getMinutes().toString().padStart(2, '0'));
+    document.querySelector("span[data-time=seconds]").textContent= (time.getSeconds().toString().padStart(2, '0'));
 }
 
 setTime()
 setInterval(setTime, 1000);
+
+//Image Gallery
+
+const galleryImages = [
+    {
+        src: "./assets/gallery/image1.jpg",
+        alt: "Robot hand"
+    },
+
+    {
+        src: "./assets/gallery/image2.jpg",
+        alt: "Phone"
+    },
+
+    {
+        src: "./assets/gallery/image3.jpg",
+        alt: "Moon"
+    }
+]
