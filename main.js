@@ -13,8 +13,28 @@ document.querySelector("#close-nav-menu").addEventListener("click", function() {
 
 
 //Greetings
+let currentHour = new Date().getHours();
+setInterval(currentHour = new Date().getHours(), 3600000)
 
-const greetingText = "Good Morning!";
+let greetingText;
+
+if (currentHour < 12 && currentHour > 5)
+{
+    greetingText = "Good Morning!";
+}
+else if (currentHour >= 12 && currentHour < 19)
+{
+    greetingText = "Good Afternoon!";
+}
+else if (currentHour >= 19 && currentHour < 10)
+{
+    greetingText = "Good Evening!";
+}
+else
+{
+    greetingText = "Good Night!";
+}
+
 const weatherCondition = "sunny";
 const locationText = "Vancouver";
 
@@ -84,6 +104,7 @@ let thumbnails = document.querySelector("#gallery .thumbnails");
 mainImage.src = galleryImages[0].src;
 mainImage.alt = galleryImages[0].alt;
 
+//Gallery selector
 //Loops through each image in image gallery and makes a thumbnail
 //Then appends the thumbnail to the thumbnails class
 galleryImages.forEach(function(img, idx){
