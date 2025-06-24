@@ -91,8 +91,20 @@ galleryImages.forEach(function(img, idx){
     thumb.src = img.src;
     thumb.alt = img.alt;
     thumb.dataset.arrayIndex = idx;
-    thumb.dataset.selected = false;
+    thumb.dataset.selected = idx === 0 ? true : false;
+
+    thumb.addEventListener("click", function(e){
+        let selectedIdx = e.target.dataset.arrayIndex;
+        let selectedImage = galleryImages[selectedIdx];
+        mainImage.src = galleryImages[selectedIdx].src;
+        mainImage.alt = galleryImages[selectedIdx].alt;
+        
+        thumbnails.querySelectorAll("img").forEach(function(img, id){
+            img.dataset.selected = false;
+        });
+
+        e.target.dataset.selected = true;
+    });
+
     thumbnails.appendChild(thumb);
 });
-
-
