@@ -42,3 +42,19 @@ document.querySelector(".weather-group").addEventListener("click", function(e) {
         document.querySelector("p#weather").innerHTML = cText;
     }
 });
+
+
+//Date and time
+//# is for finding ids
+
+function setTime()
+{
+    let time = new Date();
+
+    document.querySelector("span[data-time=hours]").textContent= (time.getHours());
+    document.querySelector("span[data-time=minutes]").textContent= (time.getMinutes());
+    document.querySelector("span[data-time=seconds]").textContent= (time.getSeconds());
+}
+
+setTime()
+setInterval(setTime, 1000);
