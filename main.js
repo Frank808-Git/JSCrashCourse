@@ -134,3 +134,5 @@ galleryImages.forEach(function(img, idx){
 
     thumbnails.appendChild(thumb);
 });
+
+//Test that it committed home
