@@ -104,15 +104,10 @@ function showGreeting()
 };
 
 //Weather greeting
-function weatherHandler()
+function weatherHandler(weather, location, temp)
 {
-    const weatherCondition = "sunny";
-    const locationText = "Vancouver";
-
-    let temp = 17;
-
-    let cText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°C outside.`;
-    let fText = `The weather is ${weatherCondition} in ${locationText} and it's ${convertToF(temp).toFixed()}°F outside.`;
+    let cText = `The weather is ${weather} in ${location} and it's ${temp.toFixed()}°C outside.`;
+    let fText = `The weather is ${weather} in ${location} and it's ${convertToF(temp).toFixed()}°F outside.`;
 
     document.querySelector("p#weather").innerHTML= cText;
 
@@ -148,7 +143,7 @@ function setTime()
     setInterval(setTime, 1000);
 }
 
-//Image Gallery
+//Image Gallery and Arrays
 function galleryHandler()
 {
     let mainImage = document.querySelector("#gallery > img");
@@ -268,6 +263,7 @@ function footerHandler()
     document.querySelector("footer").textContent = `© ${currentYear} - All rights reserved`;
 }
 
+//Using APIs to Fetch Real Time Data
 function fetchData()
 {
     navigator.geolocation.getCurrentPosition(position => {
@@ -282,10 +278,10 @@ function fetchData()
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                console.log(data.name)
                 const weather = data.weather[0].description;
                 const location = data.name;
                 const temp = data.main.temp;
+                weatherHandler(weather, location, temp)
             });
     });
 }
@@ -296,7 +292,6 @@ function fetchData()
 menuHandler();
 showGreeting();
 fetchData();
-weatherHandler();
 setTime()
 galleryHandler();
 productHandler();
