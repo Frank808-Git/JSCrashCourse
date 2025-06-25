@@ -3,6 +3,9 @@
 
 
 //Globals
+const weatherAPIKey = "35b49c42eff13c5acf3121e08aa77167";
+const weatherAPIURL = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric`
+
 const galleryImages = [
     {
         src: "./assets/gallery/image1.jpg",
@@ -106,7 +109,7 @@ function weatherHandler()
     const weatherCondition = "sunny";
     const locationText = "Vancouver";
 
-    let temp = 20.367;
+    let temp = 17;
 
     let cText = `The weather is ${weatherCondition} in ${locationText} and it's ${temp.toFixed()}°C outside.`;
     let fText = `The weather is ${weatherCondition} in ${locationText} and it's ${convertToF(temp).toFixed()}°F outside.`;
@@ -130,7 +133,6 @@ function convertToF(num)
 {
     return (num * 1.8) + 32;
 }
-
 
 //Date and time
 //# is for finding ids, . is for finding classes, X[Y=Z] is a more general way of finding elements
@@ -187,14 +189,10 @@ function productHandler()
     let totalProducts = products.length;
     document.querySelector(".products-filter label[for=all] span.product-amount").textContent = totalProducts;
 
-    let paidProducts = products.filter(function(prod){
-        return prod.price > 0;
-    });
+    let paidProducts = products.filter(prod => prod.price > 0);
     document.querySelector(".products-filter label[for=paid] span.product-amount").textContent = paidProducts.length;
 
-    let freeProducts = products.filter(function(prod){
-        return prod.price <= 0 || !prod.price;
-    });
+    let freeProducts = products.filter(prod => prod.price <= 0 || !prod.price);
     document.querySelector(".products-filter label[for=free] span.product-amount").textContent = freeProducts.length;
 
     productPopulate(products);
@@ -264,12 +262,42 @@ function productPopulate(productArray)
     });
 }
 
-//Test that it committed home
+function footerHandler()
+{
+    let currentYear = new Date().getFullYear();
+    document.querySelector("footer").textContent = `© ${currentYear} - All rights reserved`;
+}
+
+function fetchData()
+{
+    navigator.geolocation.getCurrentPosition(position => {
+        let lat = position.coords.latitude;
+        let long = position.coords.longitude;
+        let url = weatherAPIURL
+            .replace("{lat}", lat)
+            .replace("{lon}", long)
+            .replace("{API key}", weatherAPIKey);
+
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.name)
+                const weather = data.weather[0].description;
+                const location = data.name;
+                const temp = data.main.temp;
+            });
+    });
+}
+
+//JSON - JavaScript Object Notation
 
 //Main section
 menuHandler();
 showGreeting();
+fetchData();
 weatherHandler();
 setTime()
 galleryHandler();
 productHandler();
+footerHandler();
