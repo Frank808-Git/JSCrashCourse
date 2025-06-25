@@ -3,22 +3,61 @@
 
 
 //Globals
- const galleryImages = [
-        {
-            src: "./assets/gallery/image1.jpg",
-            alt: "Robot hand"
-        },
+const galleryImages = [
+    {
+        src: "./assets/gallery/image1.jpg",
+        alt: "Robot hand"
+    },
 
-        {
-            src: "./assets/gallery/image2.jpg",
-            alt: "Phone"
-        },
+    {
+        src: "./assets/gallery/image2.jpg",
+        alt: "Phone"
+    },
 
-        {
-            src: "./assets/gallery/image3.jpg",
-            alt: "Moon"
-        }
-    ];
+    {
+        src: "./assets/gallery/image3.jpg",
+        alt: "Moon"
+    }
+];
+
+const products = [
+    {
+      title: "AstroFiction",
+      author: "John Doe",
+      price: 49.9,
+      image: "./assets/products/img6.png"
+    },
+    {
+      title: "Space Odyssey",
+      author: "Marie Anne",
+      price: 35,
+      image: "./assets/products/img1.png"
+    },
+    {
+      title: "Doomed City",
+      author: "Jason Cobert",
+      price: 0,
+      image: "./assets/products/img2.png"
+    },
+    {
+      title: "Black Dog",
+      author: "John Doe",
+      price: 85.35,
+      image: "./assets/products/img3.png"
+    },
+    {
+      title: "My Little Robot",
+      author: "Pedro Paulo",
+      price: 0,
+      image: "./assets/products/img5.png"
+    },
+    {
+      title: "Garden Girl",
+      author: "Ankit Patel",
+      price: 45,
+      image: "./assets/products/img4.png"
+    }
+];
 
 //Open and close the menu
 
@@ -143,6 +182,64 @@ function galleryHandler()
     });
 }
 
+//Product List
+/*<div class="product-item">
+             <img src="./assets/products/img1.png" alt="Space Odissey">
+             <div class="product-details">
+                <h3 class="product-title">Space Odyssey</h3>
+                <p class="product-author">Marie Anne</p>
+                <p class="price-title">Price</p>
+                <p class="product-price">$ 35.00</p>
+             </div>
+          </div>
+          */
+
+function productHandler()
+{
+    let productsSection = document.querySelector(".products-area");
+
+    products.forEach(function(product, idx){
+        let prod = document.createElement("div");
+        prod.classList.add("product-item");
+
+        //Product Image
+        let prodImg = document.createElement("img");
+        prodImg.src = product.image;
+        prodImg.alt = "Image for " + product.title;
+
+        //Product Details
+        let productDetails = document.createElement("div");
+        productDetails.classList.add("product-details");
+
+        //Product Title
+        let prodTitle = document.createElement("h3");
+        prodTitle.classList.add("product-title");
+        prodTitle.textContent = product.title;
+        productDetails.append(prodTitle);
+
+        //Author
+        let prodAuthor = document.createElement("p");
+        prodAuthor.classList.add("product-author");
+        prodAuthor.textContent = product.author;
+        productDetails.append(prodAuthor);
+
+        //Price Label
+        let priceLabel = document.createElement("p");
+        priceLabel.classList.add("price-title");
+        priceLabel.textContent = "Price";
+        productDetails.append(priceLabel);
+
+        //Price
+        let prodPrice = document.createElement("p");
+        prodPrice.classList.add("product-price");
+        prodPrice.textContent = product.price > 0 ? "$" + product.price.toFixed(2) : "Free";
+        productDetails.append(prodPrice);
+
+        prod.append(prodImg);
+        prod.append(productDetails);
+        productsSection.append(prod);
+    });
+}
 
 //Test that it committed home
 
@@ -152,3 +249,4 @@ showGreeting();
 weatherHandler();
 setTime()
 galleryHandler();
+productHandler();
