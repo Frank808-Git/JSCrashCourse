@@ -184,9 +184,44 @@ function galleryHandler()
 
 function productHandler()
 {
-    let productsSection = document.querySelector(".products-area");
+    let totalProducts = products.length;
+    document.querySelector(".products-filter label[for=all] span.product-amount").textContent = totalProducts;
 
-    products.forEach(function(product, idx){
+    let paidProducts = products.filter(function(prod){
+        return prod.price > 0;
+    });
+    document.querySelector(".products-filter label[for=paid] span.product-amount").textContent = paidProducts.length;
+
+    let freeProducts = products.filter(function(prod){
+        return prod.price <= 0 || !prod.price;
+    });
+    document.querySelector(".products-filter label[for=free] span.product-amount").textContent = freeProducts.length;
+
+    productPopulate(products);
+
+    let productFilter = document.querySelector(".products-filter");
+    productFilter.addEventListener("click", function(e){
+        if (e.target.id === "all")
+        {
+            productPopulate(products);
+        }
+        else if (e.target.id === "free")
+        {
+            productPopulate(freeProducts);
+        }
+        else if (e.target.id === "paid")
+        {
+            productPopulate(paidProducts);
+        }
+    });
+}
+
+function productPopulate(productArray)
+{
+    let productsSection = document.querySelector(".products-area");
+    productsSection.textContent = "";
+
+    productArray.forEach(function(product, idx){
         let prod = document.createElement("div");
         prod.classList.add("product-item");
 
@@ -227,20 +262,6 @@ function productHandler()
         prod.append(productDetails);
         productsSection.append(prod);
     });
-
-    let totalProducts = products.length;
-    document.querySelector(".products-filter label[for=all] span.product-amount").textContent = totalProducts;
-
-    let paidProducts = products.filter(function(prod){
-        return prod.price > 0;
-    });
-    document.querySelector(".products-filter label[for=paid] span.product-amount").textContent = paidProducts.length;
-    console.log(paidProducts.length)
-
-    let freeProducts = products.filter(function(prod){
-        return prod.price == 0;
-    });
-    document.querySelector(".products-filter label[for=free] span.product-amount").textContent = freeProducts.length;
 }
 
 //Test that it committed home
