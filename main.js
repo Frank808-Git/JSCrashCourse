@@ -182,18 +182,6 @@ function galleryHandler()
     });
 }
 
-//Product List
-/*<div class="product-item">
-             <img src="./assets/products/img1.png" alt="Space Odissey">
-             <div class="product-details">
-                <h3 class="product-title">Space Odyssey</h3>
-                <p class="product-author">Marie Anne</p>
-                <p class="price-title">Price</p>
-                <p class="product-price">$ 35.00</p>
-             </div>
-          </div>
-          */
-
 function productHandler()
 {
     let productsSection = document.querySelector(".products-area");
@@ -239,6 +227,20 @@ function productHandler()
         prod.append(productDetails);
         productsSection.append(prod);
     });
+
+    let totalProducts = products.length;
+    document.querySelector(".products-filter label[for=all] span.product-amount").textContent = totalProducts;
+
+    let paidProducts = products.filter(function(prod){
+        return prod.price > 0;
+    });
+    document.querySelector(".products-filter label[for=paid] span.product-amount").textContent = paidProducts.length;
+    console.log(paidProducts.length)
+
+    let freeProducts = products.filter(function(prod){
+        return prod.price == 0;
+    });
+    document.querySelector(".products-filter label[for=free] span.product-amount").textContent = freeProducts.length;
 }
 
 //Test that it committed home
