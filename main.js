@@ -282,7 +282,10 @@ function fetchData()
                 const location = data.name;
                 const temp = data.main.temp;
                 weatherHandler(weather, location, temp)
-            });
+            }).catch((err => {
+                console.log(err);
+                document.querySelector("p#weather").innerHTML= "Unable to retrieve weather data.";
+            }));
     });
 }
 
