@@ -1,9 +1,10 @@
 //Comments look like this
 //; semicolons are not necessary
 
+import { weatherKey } from "./config.js";
 
 //Globals
-export const weatherAPIKey = "35b49c42eff13c5acf3121e08aa77167";
+export const weatherAPIKey = weatherKey;
 export const weatherAPIURL = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}&units=metric`
 
 export const galleryImages = [
